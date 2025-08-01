@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel Animator</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/output.css">
+  </head>
+  <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-800 via-blue-900 to-purple-900 text-gray-100">
+    <div class="flex flex-col items-center w-full max-w-5xl p-8">
+      <!-- Game Header -->
+      <div class="w-full max-w-3xl mb-6 p-6 bg-gray-800 bg-opacity-80 backdrop-blur-lg rounded-2xl border border-gray-600 shadow-xl">
+        <h1 class="text-3xl font-bold text-center text-indigo-300 mb-4">Pixel Animator</h1>
+        <div class="flex justify-between items-center">
+          <div class="text-center">
+            <div class="text-xl font-mono text-gray-200" id="revealTimer">00:00</div>
+            <div class="text-xs text-gray-400">Reveal Duration</div>
+          </div>
+          <div class="text-center">
+            <div class="text-sm text-gray-300">
+              Progress: <span id="revealProgress" class="text-cyan-400 font-bold">0%</span>
+            </div>
+            <div class="text-xs text-gray-400">Image Reveal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Canvas -->
+      <div class="w-full max-w-3xl">
+        <canvas
+          id="revealCanvas"
+          class="w-full rounded-2xl shadow-2xl border-4 border-gray-700 bg-gray-900"
+        ></canvas>
+      </div>
+
+      <!-- Game Controls -->
+      <div class="w-full max-w-3xl mt-6 p-6 bg-gray-800 bg-opacity-80 backdrop-blur-lg rounded-2xl border border-gray-600 shadow-xl">
+        <!-- Image Upload -->
+        <div class="mb-6">
+          <label for="imageUpload" class="block text-sm font-medium text-gray-300 mb-2">
+            Upload Image
+          </label>
+          <input
+            type="file"
+            id="imageUpload"
+            accept="image/*"
+            class="w-full p-2 bg-gray-700 text-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500"
+          />
+          <p id="errorMessage" class="text-red-400 text-sm mt-2 hidden"></p>
+        </div>
+
+        <!-- Main Controls -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+          <button
+            id="togglePauseBtn"
+            class="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md"
+          >
+            Pause
+          </button>
+          <button
+            id="resetRevealBtn"
+            class="px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md"
+          >
+            Reset
+          </button>
+          <button
+            id="downloadBtn"
+            class="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md"
+            disabled
+          >
+            Download Image
+          </button>
+          <div>
+            <label for="gridSizeSelect" class="block text-sm font-medium text-gray-300 mb-2">
+              Pixel Size
+            </label>
+            <select
+              id="gridSizeSelect"
+              class="w-full p-2 bg-gray-700 text-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="20">Small (20x20)</option>
+              <option value="25" selected>Medium (25x25)</option>
+              <option value="30">Large (30x30)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Animation Speed -->
+        <div class="mb-6">
+          <label for="animationSpeedSlider" class="block text-sm font-medium text-gray-300 mb-2">
+            Animation Speed: <span id="currentSpeedValue" class="text-cyan-400 font-bold">1.0</span>
+          </label>
+          <input
+            type="range"
+            id="animationSpeedSlider"
+            min="0.5"
+            max="5"
+            value="1"
+            step="0.1"
+            class="w-full h-2 bg-gray-700 rounded-lg cursor-pointer"
+          />
+        </div>
+
+        <!-- Game Status -->
+        <div class="text-center text-gray-300 text-sm">
+          Status: <span id="gameStatus" class="text-indigo-300 font-semibold">Waiting for Image</span>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
